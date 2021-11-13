@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Sock_t {
-    QByteArrayData data[6];
-    char stringdata0[59];
+    QByteArrayData data[7];
+    char stringdata0[69];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,13 +34,14 @@ static const qt_meta_stringdata_Sock_t qt_meta_stringdata_Sock = {
 QT_MOC_LITERAL(0, 0, 4), // "Sock"
 QT_MOC_LITERAL(1, 5, 10), // "NewConnect"
 QT_MOC_LITERAL(2, 16, 0), // ""
-QT_MOC_LITERAL(3, 17, 18), // "incomingConnection"
-QT_MOC_LITERAL(4, 36, 7), // "qintptr"
-QT_MOC_LITERAL(5, 44, 14) // "receiveMessage"
+QT_MOC_LITERAL(3, 17, 9), // "receiveOK"
+QT_MOC_LITERAL(4, 27, 18), // "incomingConnection"
+QT_MOC_LITERAL(5, 46, 7), // "qintptr"
+QT_MOC_LITERAL(6, 54, 14) // "receiveMessage"
 
     },
-    "Sock\0NewConnect\0\0incomingConnection\0"
-    "qintptr\0receiveMessage"
+    "Sock\0NewConnect\0\0receiveOK\0"
+    "incomingConnection\0qintptr\0receiveMessage"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,25 +51,27 @@ static const uint qt_meta_data_Sock[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
+       1,    2,   34,    2, 0x06 /* Public */,
+       3,    1,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   30,    2, 0x0a /* Public */,
-       5,    0,   33,    2, 0x0a /* Public */,
+       4,    1,   42,    2, 0x0a /* Public */,
+       6,    0,   45,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::UShort,    2,    2,
+    QMetaType::Void, QMetaType::QString,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void, 0x80000000 | 5,    2,
     QMetaType::Void,
 
        0        // eod
@@ -80,17 +83,25 @@ void Sock::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         auto *_t = static_cast<Sock *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->NewConnect(); break;
-        case 1: _t->incomingConnection((*reinterpret_cast< qintptr(*)>(_a[1]))); break;
-        case 2: _t->receiveMessage(); break;
+        case 0: _t->NewConnect((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< quint16(*)>(_a[2]))); break;
+        case 1: _t->receiveOK((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->incomingConnection((*reinterpret_cast< qintptr(*)>(_a[1]))); break;
+        case 3: _t->receiveMessage(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Sock::*)();
+            using _t = void (Sock::*)(QString , quint16 );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Sock::NewConnect)) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (Sock::*)(QString );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Sock::receiveOK)) {
+                *result = 1;
                 return;
             }
         }
@@ -126,21 +137,29 @@ int Sock::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
 
 // SIGNAL 0
-void Sock::NewConnect()
+void Sock::NewConnect(QString _t1, quint16 _t2)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void Sock::receiveOK(QString _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
