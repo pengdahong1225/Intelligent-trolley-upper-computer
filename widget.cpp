@@ -1,12 +1,22 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
     this->setWindowTitle("Sprensence Car");
+
+    QFile CssFile;
+    CssFile.setFileName("../Qssfile/car.qss");
+    CssFile.open(QFile::ReadOnly);
+    QTextStream filetext(&CssFile);
+    QString style = filetext.readAll();
+    this->setStyleSheet(style);
+    CssFile.close();
 
     Group1.addButton(ui->radioButton,1);
     Group1.addButton(ui->radioButton_2,2);
@@ -46,14 +56,20 @@ Widget::Widget(QWidget *parent) :
     void (QComboBox::*ptr)(int index) = &QComboBox::currentIndexChanged;
     connect(ui->comboBox,ptr,[&](int index){
         ui->stackedWidget_2->setCurrentIndex(index);
-        if(ui->comboBox->currentIndex() == 1)
+        if(TcpClient)
         {
-            this->TcpClient->AAA = true;
-            qDebug()<<this->TcpClient->AAA;
+            if(ui->comboBox->currentIndex() == 1)
+            {
+                this->TcpClient->AAA = true;
+                qDebug()<<this->TcpClient->AAA;
+            }
+            else {
+                this->TcpClient->AAA = false;
+                qDebug()<<this->TcpClient->AAA;
+            }
         }
         else {
-            this->TcpClient->AAA = false;
-            qDebug()<<this->TcpClient->AAA;
+            qDebug()<<"端口没有打开";
         }
     });
     connect(ui->pbn_no,&QPushButton::clicked,[&](){
@@ -73,11 +89,12 @@ void Widget::Run()
     if(TcpClient == nullptr)
     {
         /*192.168.212.176 :9000*/
-        TcpClient = new Sock(this,QString("192.168.74.1"),quint16(9000));
+        TcpClient = new Sock(this,QString("10.69.4.184"),quint16(9000));
+        ui->textEdit->append(QString("端口%1打开").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);
         connect(this->TcpClient,&Sock::receiveOK,[&](QString receiveMSG){
-            ui->textEdit_2->append(receiveMSG);
+            ui->textEdit_2->append(QString("from voice to car:")+QString(receiveMSG)+QString("            转发成功!"));
         });
     }
     else {
@@ -137,8 +154,9 @@ void Widget::SendMessage()
 {
     if(this->TcpClient->GetSize() > 0)
     {
-            Init_Message2();
-            this->TcpClient->SendMessage();
+        Init_Message2();
+        this->TcpClient->SendMessage();
+        ui->textEdit_3->append("***********发送成功***********");
     }
     else {
         ui->textEdit->append("No Connection");

@@ -13,6 +13,7 @@ public:
     Sock(QObject *parent,QString,quint16);
     void SendMessage();
     std::size_t GetSize(){return this->SockArray.size();}
+    quint16 GetPort(){return listen_Port;}
     QJsonObject message;
     void JsonInit();
      bool AAA = false;

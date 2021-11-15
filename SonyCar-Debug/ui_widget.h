@@ -225,8 +225,6 @@ public:
         comboBox = new QComboBox(page_2);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
         comboBox->setGeometry(QRect(20, 30, 111, 31));
         comboBox->setFont(font);
@@ -314,7 +312,7 @@ public:
         textEdit_3->setObjectName(QString::fromUtf8("textEdit_3"));
         textEdit_3->setGeometry(QRect(460, 50, 371, 241));
         QFont font4;
-        font4.setPointSize(11);
+        font4.setPointSize(14);
         textEdit_3->setFont(font4);
         textEdit_3->setReadOnly(true);
         stackedWidget_2->addWidget(page_3);
@@ -375,7 +373,7 @@ public:
 
         retranslateUi(Widget);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
         stackedWidget_2->setCurrentIndex(0);
 
 
@@ -407,8 +405,6 @@ public:
         pbn_C4->setText(QApplication::translate("Widget", "\346\226\255\345\274\200", nullptr));
         comboBox->setItemText(0, QApplication::translate("Widget", "1", nullptr));
         comboBox->setItemText(1, QApplication::translate("Widget", "\350\257\255\351\237\263", nullptr));
-        comboBox->setItemText(2, QApplication::translate("Widget", "3", nullptr));
-        comboBox->setItemText(3, QApplication::translate("Widget", "4", nullptr));
 
         pbn_Send->setText(QApplication::translate("Widget", "\345\217\221\351\200\201", nullptr));
         pbn_Save->setText(QApplication::translate("Widget", "\344\277\235\345\255\230", nullptr));

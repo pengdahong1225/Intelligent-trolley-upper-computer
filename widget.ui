@@ -35,7 +35,7 @@
     <enum>QFrame::Plain</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="Line" name="line">
@@ -561,16 +561,6 @@
        <string>语音</string>
       </property>
      </item>
-     <item>
-      <property name="text">
-       <string>3</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>4</string>
-      </property>
-     </item>
     </widget>
     <widget class="QStackedWidget" name="stackedWidget_2">
      <property name="geometry">
@@ -872,7 +862,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>11</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="readOnly">

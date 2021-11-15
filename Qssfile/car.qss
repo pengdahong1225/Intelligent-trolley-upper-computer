@@ -1,0 +1,29 @@
+QWidget{
+    background-color:#ece7e7;
+    border-color: #e61010;   
+}
+
+QPushButton {       /*按钮样式*/
+    color: #fffafa;
+    background-color: #5a5a5a;
+    border-radius:7px;
+}
+QPushButton:pressed {   /*按下样式*/
+    /*background-color: #fffafa;
+    color: #000000;*/
+    border-style: inset;
+    padding-left:3px;
+    /*上内边距为3像素，让按下时字向下移动3像素*/
+    padding-top:3px;
+}
+QTextEdit{
+    background-color:#d7d9db ;
+    color:brown;
+    border-radius:10px;
+}
+QGroupBox{
+    color: brown;
+    font-weight: bold;
+    font-size:20px;
+    font-family:"fangsong";
+}
