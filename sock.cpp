@@ -11,13 +11,20 @@ Sock::Sock(QObject *parent, QString _IP, quint16 _Port):QTcpServer (parent),list
     }
 }
 
+Sock::~Sock()
+{
+    delete c;
+}
+
 void Sock::incomingConnection(qintptr handle)
 {
     c = new QTcpSocket(this);
     c->setSocketDescriptor(handle);
-    connect(c,&QTcpSocket::readyRead,this,&Sock::receiveMessage);
     /*加入连接队列*/
     SockArray.push_back(c);
+    if(SockArray.size() > 1){
+        connect(SockArray[1],&QTcpSocket::readyRead,this,&Sock::receiveMessage);
+    }
     emit NewConnect(c->peerAddress().toString(),c->peerPort());
     c = nullptr;
 }
@@ -35,7 +42,7 @@ void Sock::receiveMessage()
     JsonInit();
     if(this->AAA)
     {
-        if(SockArray[1]->bytesAvailable()>0)//排除无用字符
+        if(SockArray[1]->bytesAvailable()>0)
         {
             QByteArray buffer;
             buffer = SockArray[1]->readAll();

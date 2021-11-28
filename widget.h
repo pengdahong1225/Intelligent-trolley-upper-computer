@@ -26,7 +26,6 @@ private:
     Sock* TcpClient;
     QButtonGroup Group1;
     QButtonGroup Group2;
-    //QJsonObject jsonobject;
     std::vector<int> from;
     std::vector<int> to;
 };
