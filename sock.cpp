@@ -9,6 +9,21 @@ Sock::Sock(QObject *parent, QString _IP, quint16 _Port):QTcpServer (parent),list
         qDebug()<<"监听失败: "<<errorString();
         close();
     }
+    timer = new QTimer(this);
+    connect(timer,&QTimer::timeout,[this](){
+        if(this->send_WakeHand(*SockArray[0]) == false)
+        {
+            for(auto& s : SockArray){
+                s->close();
+            }
+            SockArray.clear();
+            if(CON_FLAG == true)
+            {
+                emit sock_disc();
+            }
+            CON_FLAG = false;
+        }
+    });
 }
 
 Sock::~Sock()
@@ -26,7 +41,11 @@ void Sock::incomingConnection(qintptr handle)
         connect(SockArray[1],&QTcpSocket::readyRead,this,&Sock::receiveMessage);
     }
     emit NewConnect(c->peerAddress().toString(),c->peerPort());
+    CON_FLAG = true;
     c = nullptr;
+    if(SockArray.size() == 1){
+        timer->start(1000);
+    }
 }
 
 void Sock::SendMessage()
@@ -71,4 +90,13 @@ void Sock::JsonInit()
     message.insert("goodsstart",F);
     this->TcpClient->message.insert("goodsend",S);*/
     message.insert("status", "okey");
+}
+
+bool Sock::send_WakeHand(QTcpSocket& sock)
+{
+    qint64 ret = sock.write("wake hands");
+    if(ret == -1){
+        return false;
+    }
+    return true;
 }

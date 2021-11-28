@@ -90,12 +90,23 @@ void Widget::Run()
     if(TcpClient == nullptr)
     {
         /*192.168.212.176 :9000*/
-        TcpClient = new Sock(this,QString("192.168.212.176"),quint16(9000));
+        TcpClient = new Sock(this,QString("10.97.13.6"),quint16(9000));
         ui->textEdit->append(QString("端口%1打开").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);
         connect(this->TcpClient,&Sock::receiveOK,[&](QString receiveMSG){
             ui->textEdit_2->append(QString("from voice to car:")+QString(receiveMSG)+QString("            转发成功!"));
+        });
+        connect(this->TcpClient,&Sock::sock_disc,[&](){
+            ui->textEdit->append("客户端断开");
+            ui->label_C1Z->setText(QString("离线"));
+            ui->label_C1IP->setText(QString("IP:NULL"));
+            ui->label_C1PORT->setText(QString("端口:NULL"));
+
+            ui->textEdit->append("客户端断开");
+            ui->label_C2Z->setText(QString("离线"));
+            ui->label_C2IP->setText(QString("IP:NULL"));
+            ui->label_C2PORT->setText(QString("端口:NULL"));
         });
     }
     else {
