@@ -1,7 +1,6 @@
 #include "sock.h"
 #include<QDebug>
 
-
 Sock::Sock(QObject *parent, QString _IP, quint16 _Port):QTcpServer (parent),listen_IP(_IP),listen_Port(_Port)
 {
     if(!QTcpServer::listen(QHostAddress(listen_IP),listen_Port))
@@ -28,6 +27,13 @@ Sock::Sock(QObject *parent, QString _IP, quint16 _Port):QTcpServer (parent),list
 
 Sock::~Sock()
 {
+    for(auto s:SockArray){
+        if(s){
+            s->close();
+            delete s;
+            s=nullptr;
+        }
+    }
     delete c;
 }
 
@@ -48,7 +54,7 @@ void Sock::incomingConnection(qintptr handle)
     }
 }
 
-void Sock::SendMessage()
+void Sock::sendMessage()
 {
     QJsonDocument jsondocument;
     jsondocument.setObject(message);
@@ -77,6 +83,7 @@ void Sock::receiveMessage()
     }
     SockArray[1]->readAll();
 }
+
 void Sock::JsonInit()
 {
     message.insert("arm0", "200");

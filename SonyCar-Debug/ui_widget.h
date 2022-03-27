@@ -75,6 +75,8 @@ public:
     QWidget *page_4;
     QGroupBox *groupBox_5;
     QTextEdit *textEdit_2;
+    QWidget *page_video;
+    QWidget *widget_video;
     QGroupBox *groupBox_2;
     QTextEdit *textEdit;
     QPushButton *pbn_clear;
@@ -82,16 +84,20 @@ public:
     QPushButton *pbn_Manage;
     QPushButton *pbn_Work;
     QPushButton *pbn_Run;
+    QPushButton *pbn_video;
+    QPushButton *pbn_small;
+    QPushButton *pbn_exit;
+    QLabel *label_title;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QString::fromUtf8("Widget"));
-        Widget->resize(1141, 665);
-        Widget->setMaximumSize(QSize(1141, 665));
+        Widget->resize(1150, 700);
+        Widget->setMaximumSize(QSize(1150, 700));
         stackedWidget = new QStackedWidget(Widget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(210, 40, 901, 581));
+        stackedWidget->setGeometry(QRect(220, 60, 901, 601));
         stackedWidget->setFrameShape(QFrame::StyledPanel);
         stackedWidget->setFrameShadow(QFrame::Plain);
         page = new QWidget();
@@ -333,9 +339,15 @@ public:
         textEdit_2->setReadOnly(true);
         stackedWidget_2->addWidget(page_4);
         stackedWidget->addWidget(page_2);
+        page_video = new QWidget();
+        page_video->setObjectName(QString::fromUtf8("page_video"));
+        widget_video = new QWidget(page_video);
+        widget_video->setObjectName(QString::fromUtf8("widget_video"));
+        widget_video->setGeometry(QRect(0, 0, 901, 601));
+        stackedWidget->addWidget(page_video);
         groupBox_2 = new QGroupBox(Widget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(20, 300, 181, 321));
+        groupBox_2->setGeometry(QRect(30, 340, 181, 321));
         QFont font6;
         font6.setFamily(QString::fromUtf8("Consolas"));
         groupBox_2->setFont(font6);
@@ -352,7 +364,7 @@ public:
         pbn_clear->setFont(font);
         groupBox = new QGroupBox(Widget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(20, 30, 171, 251));
+        groupBox->setGeometry(QRect(30, 70, 171, 251));
         groupBox->setFont(font6);
         groupBox->setAlignment(Qt::AlignCenter);
         pbn_Manage = new QPushButton(groupBox);
@@ -362,18 +374,33 @@ public:
         pbn_Manage->setCursor(QCursor(Qt::PointingHandCursor));
         pbn_Work = new QPushButton(groupBox);
         pbn_Work->setObjectName(QString::fromUtf8("pbn_Work"));
-        pbn_Work->setGeometry(QRect(20, 110, 131, 41));
+        pbn_Work->setGeometry(QRect(20, 90, 131, 41));
         pbn_Work->setFont(font2);
         pbn_Work->setCursor(QCursor(Qt::PointingHandCursor));
         pbn_Run = new QPushButton(groupBox);
         pbn_Run->setObjectName(QString::fromUtf8("pbn_Run"));
-        pbn_Run->setGeometry(QRect(20, 180, 131, 41));
+        pbn_Run->setGeometry(QRect(20, 140, 131, 41));
         pbn_Run->setFont(font2);
         pbn_Run->setCursor(QCursor(Qt::PointingHandCursor));
+        pbn_video = new QPushButton(groupBox);
+        pbn_video->setObjectName(QString::fromUtf8("pbn_video"));
+        pbn_video->setGeometry(QRect(20, 190, 131, 41));
+        pbn_video->setFont(font2);
+        pbn_video->setCursor(QCursor(Qt::PointingHandCursor));
+        pbn_small = new QPushButton(Widget);
+        pbn_small->setObjectName(QString::fromUtf8("pbn_small"));
+        pbn_small->setGeometry(QRect(1050, 10, 41, 41));
+        pbn_exit = new QPushButton(Widget);
+        pbn_exit->setObjectName(QString::fromUtf8("pbn_exit"));
+        pbn_exit->setGeometry(QRect(1100, 10, 41, 41));
+        label_title = new QLabel(Widget);
+        label_title->setObjectName(QString::fromUtf8("label_title"));
+        label_title->setGeometry(QRect(30, 10, 1011, 41));
+        label_title->setFrameShape(QFrame::Box);
 
         retranslateUi(Widget);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(2);
         stackedWidget_2->setCurrentIndex(0);
 
 
@@ -428,6 +455,10 @@ public:
         pbn_Manage->setText(QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\257\347\256\241\347\220\206", nullptr));
         pbn_Work->setText(QApplication::translate("Widget", "\345\267\245\344\275\234", nullptr));
         pbn_Run->setText(QApplication::translate("Widget", "\345\274\200\345\220\257\347\253\257\345\217\243", nullptr));
+        pbn_video->setText(QApplication::translate("Widget", "\350\247\206\351\242\221", nullptr));
+        pbn_small->setText(QApplication::translate("Widget", "-", nullptr));
+        pbn_exit->setText(QApplication::translate("Widget", "X", nullptr));
+        label_title->setText(QApplication::translate("Widget", "TextLabel", nullptr));
     } // retranslateUi
 
 };

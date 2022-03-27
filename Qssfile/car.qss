@@ -1,8 +1,15 @@
 QWidget{
-    background-color:#ece7e7;
-    border-color: #e61010;   
+    /*background-color:#ece7e7;*/
+    background-color: rgb(208,224,227);
+    border-color: #e61010; 
+      
 }
-
+QLabel#label_title{
+    border-radius:0px;
+    color:#CACAD0;
+    background-color:rgba(0,0,0,0);
+    border-style:none;
+}
 QPushButton {       /*按钮样式*/
     color: #fffafa;
     background-color: #5a5a5a;
@@ -16,8 +23,22 @@ QPushButton:pressed {   /*按下样式*/
     /*上内边距为3像素，让按下时字向下移动3像素*/
     padding-top:3px;
 }
+QPushButton#pbn_exit,QPushButton#pbn_small{
+    background-color: #473C8B; /*背景色*/ 
+	border-style: outset;
+	border-width: 2px;
+	border-radius:5px; /*边界圆滑*/
+	border-color: #8b6055;
+	font: bold 14px;
+	min-width:2em;
+	color:white; /*字体颜色*/
+	font-family:华文新魏;
+	padding: 5px;
+}  
+
+
 QTextEdit{
-    background-color:#d7d9db ;
+    background-color:rgb(208,224,227) ;
     color:brown;
     border-radius:10px;
 }
@@ -27,3 +48,4 @@ QGroupBox{
     font-size:20px;
     font-family:"fangsong";
 }
+

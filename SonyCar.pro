@@ -5,8 +5,10 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += sql
 QT += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+RC_ICONS = Spresence.ico
 
 TARGET = SonyCar
 TEMPLATE = app
@@ -25,18 +27,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        imysql.cpp \
+        login.cpp \
         main.cpp \
         sock.cpp \
+        webwidget.cpp \
         widget.cpp
 
 HEADERS += \
+        imysql.h \
+        login.h \
         sock.h \
-        widget.h
+        webwidget.h \
+        widget.h \
+        wke.h
 
 FORMS += \
+        login.ui \
         widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    qrc.qrc

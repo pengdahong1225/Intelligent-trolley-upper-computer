@@ -220,6 +220,7 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32-g++/qmake.conf \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/default_pre.prf \
@@ -406,6 +407,7 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32-g++/qmake.conf:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/toolchain.prf:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/default_pre.prf:

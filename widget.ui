@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1141</width>
-    <height>665</height>
+    <width>1150</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1141</width>
-    <height>665</height>
+    <width>1150</width>
+    <height>700</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -22,10 +22,10 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>40</y>
+     <x>220</x>
+     <y>60</y>
      <width>901</width>
-     <height>581</height>
+     <height>601</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -35,7 +35,7 @@
     <enum>QFrame::Plain</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="Line" name="line">
@@ -916,12 +916,24 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QWidget" name="page_video">
+    <widget class="QWidget" name="widget_video" native="true">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>901</width>
+       <height>601</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>300</y>
+     <x>30</x>
+     <y>340</y>
      <width>181</width>
      <height>321</height>
     </rect>
@@ -982,8 +994,8 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
+     <x>30</x>
+     <y>70</y>
      <width>171</width>
      <height>251</height>
     </rect>
@@ -1025,7 +1037,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
+      <y>90</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -1047,7 +1059,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>180</y>
+      <y>140</y>
       <width>131</width>
       <height>41</height>
      </rect>
@@ -1065,6 +1077,70 @@
      <string>开启端口</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pbn_video">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>视频</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pbn_small">
+   <property name="geometry">
+    <rect>
+     <x>1050</x>
+     <y>10</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbn_exit">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>10</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>X</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_title">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>1011</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

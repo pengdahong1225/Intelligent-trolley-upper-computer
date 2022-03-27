@@ -246,6 +246,7 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 		../SonyCar.pro \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Widgets.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Gui.prl \
+		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Sql.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Network.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Core.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/qtmain.prl
@@ -433,6 +434,7 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 ../SonyCar.pro:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Widgets.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Gui.prl:
+../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Sql.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Network.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Core.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/qtmain.prl:

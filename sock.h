@@ -13,7 +13,7 @@ class Sock:public QTcpServer
 public:
     Sock(QObject *parent,QString,quint16);
     ~Sock();
-    void SendMessage();
+    void sendMessage();
     std::size_t GetSize(){return this->SockArray.size();}
     quint16 GetPort(){return listen_Port;}
     QJsonObject message;

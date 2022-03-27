@@ -3,12 +3,15 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QVBoxLayout>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Sprensence Car");
+    this->setWindowTitle("Spresence Car");
+    this->setAttribute(Qt::WA_DeleteOnClose,true);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
 
     QFile CssFile;
     CssFile.setFileName("../Qssfile/car.qss");
@@ -36,6 +39,8 @@ Widget::Widget(QWidget *parent) :
         ui->stackedWidget->setCurrentIndex(1);
     });
     connect(ui->pbn_Run,&QPushButton::clicked,this,&Widget::Run);
+    connect(ui->pbn_video,&QPushButton::clicked,this,&Widget::StartVideo);
+
     connect(ui->pbn_C1,&QPushButton::clicked,[&](){
         ui->textEdit->append("客户端断开");
         ui->label_C1Z->setText(QString("离线"));
@@ -53,6 +58,7 @@ Widget::Widget(QWidget *parent) :
     });
     connect(ui->pbn_Save,&QPushButton::clicked,this,&Widget::Init_Message);
     TcpClient = nullptr;
+    webwidget = nullptr;
     void (QComboBox::*ptr)(int index) = &QComboBox::currentIndexChanged;
     connect(ui->comboBox,ptr,[&](int index){
         ui->stackedWidget_2->setCurrentIndex(index);
@@ -77,11 +83,22 @@ Widget::Widget(QWidget *parent) :
         from.clear();
         to.clear();
     });
+    connect(ui->pbn_small,&QPushButton::clicked,this,[=](){
+        this->showMinimized();
+    });
+    connect(ui->pbn_exit,&QPushButton::clicked,this,[=](){
+        exit(0);
+    });
 }
 
 Widget::~Widget()
 {
-    delete TcpClient;
+    if(TcpClient){
+        TcpClient->close();
+        delete TcpClient;
+    }
+    if(webwidget)
+        delete webwidget;
     delete ui;
 }
 
@@ -90,7 +107,7 @@ void Widget::Run()
     if(TcpClient == nullptr)
     {
         /*192.168.212.176 :9000*/
-        TcpClient = new Sock(this,QString("10.97.13.6"),quint16(9000));
+        TcpClient = new Sock(this,QString("10.218.31.224"),quint16(9000));
         ui->textEdit->append(QString("端口%1打开").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);
@@ -167,10 +184,27 @@ void Widget::SendMessage()
     if(this->TcpClient->GetSize() > 0)
     {
         Init_Message2();
-        this->TcpClient->SendMessage();
+        this->TcpClient->sendMessage();
         ui->textEdit_3->append("***********发送成功***********");
     }
     else {
         ui->textEdit->append("No Connection");
+    }
+}
+
+void Widget::receive_login()
+{
+    this->show();
+}
+
+void Widget::StartVideo()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    if(webwidget==nullptr){
+        webwidget = new WebWidget(this);
+        webwidget->webView = wkeCreateWebWindow(WKE_WINDOW_TYPE_CONTROL,(HWND)ui->widget_video->winId(),
+                                                0, 0, ui->widget_video->width(),ui->widget_video->height());
+        wkeLoadURL(webwidget->webView, "https://haokan.baidu.com/v?pd=wisenatural&vid=6013038611919188996");
+        wkeShowWindow(webwidget->webView, TRUE);
     }
 }
