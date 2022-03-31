@@ -7,6 +7,7 @@
 QT       += core gui
 QT += sql
 QT += network
+QT += multimedia multimediawidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 RC_ICONS = Spresence.ico
 

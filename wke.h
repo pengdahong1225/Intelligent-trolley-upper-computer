@@ -68,7 +68,7 @@ typedef unsigned short wchar_t;
 #if defined(__cplusplus)
 #define WKE_EXTERN_C extern "C" 
 #else
-#define WKE_EXTERN_C 
+#define WKE_EXTERN_C
 #endif
 
 typedef char utf8;

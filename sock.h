@@ -19,7 +19,7 @@ public:
     QJsonObject message;
     void JsonInit();
     bool send_WakeHand(QTcpSocket&);
-    bool AAA = false;
+    bool voiceFlag = false;
     bool CON_FLAG = false;
 signals:
     void NewConnect(QString,quint16);
@@ -28,6 +28,7 @@ signals:
 public slots:
     void incomingConnection(qintptr);
     void receiveMessage();
+    void MSGError(QAbstractSocket::SocketError);
 private:
     QTcpSocket* c;
     std::vector<QTcpSocket*> SockArray;

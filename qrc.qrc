@@ -3,6 +3,9 @@
         <file>pic/3.png</file>
         <file>pic/4.png</file>
         <file>pic/5.png</file>
-        <file>pic/6.png</file>
+        <file>pic/close.ico</file>
+        <file>pic/small.ico</file>
+        <file>pic/title.png</file>
+        <file>pic/arm.png</file>
     </qresource>
 </RCC>

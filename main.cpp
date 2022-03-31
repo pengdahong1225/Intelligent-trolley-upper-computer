@@ -1,12 +1,10 @@
 #include "widget.h"
 #include "login.h"
-#include "wke.h"
 #include <QApplication>
 #include <QObject>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QApplication::setStyle("windows");
     //login *obj=new login;
     //obj->show();
     Widget* w=new Widget;

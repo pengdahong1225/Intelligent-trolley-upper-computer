@@ -4,91 +4,18 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QDialog>
+#include <QIcon>
+#include <QMediaPlayer>
+#include <QVideoWidget>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Spresence Car");
     this->setAttribute(Qt::WA_DeleteOnClose,true);
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
-
-    QFile CssFile;
-    CssFile.setFileName("../Qssfile/car.qss");
-    CssFile.open(QFile::ReadOnly);
-    QTextStream filetext(&CssFile);
-    QString style = filetext.readAll();
-    this->setStyleSheet(style);
-    CssFile.close();
-
-    Group1.addButton(ui->radioButton,1);
-    Group1.addButton(ui->radioButton_2,2);
-    Group1.addButton(ui->radioButton_5,3);
-    Group1.addButton(ui->radioButton_6,4);
-    Group1.addButton(ui->radioButton_7,5);
-    Group2.addButton(ui->radioButton_13,1);
-    Group2.addButton(ui->radioButton_14,2);
-    Group2.addButton(ui->radioButton_15,3);
-    Group2.addButton(ui->radioButton_16,4);
-    Group2.addButton(ui->radioButton_17,5);
-
-    connect(ui->pbn_Manage,&QPushButton::clicked,[&](){
-        ui->stackedWidget->setCurrentIndex(0);
-    });
-    connect(ui->pbn_Work,&QPushButton::clicked,[&](){
-        ui->stackedWidget->setCurrentIndex(1);
-    });
-    connect(ui->pbn_Run,&QPushButton::clicked,this,&Widget::Run);
-    connect(ui->pbn_video,&QPushButton::clicked,this,&Widget::StartVideo);
-
-    connect(ui->pbn_C1,&QPushButton::clicked,[&](){
-        ui->textEdit->append("客户端断开");
-        ui->label_C1Z->setText(QString("离线"));
-        ui->label_C1IP->setText(QString("IP:NULL"));
-        ui->label_C1PORT->setText(QString("端口:NULL"));
-    });
-    connect(ui->pbn_C2,&QPushButton::clicked,[&](){
-        ui->textEdit->append("客户端断开");
-        ui->label_C2Z->setText(QString("离线"));
-        ui->label_C2IP->setText(QString("IP:NULL"));
-        ui->label_C2PORT->setText(QString("端口:NULL"));
-    });
-    connect(ui->pbn_clear,&QPushButton::clicked,[&](){
-        ui->textEdit->clear();
-    });
-    connect(ui->pbn_Save,&QPushButton::clicked,this,&Widget::Init_Message);
-    TcpClient = nullptr;
-    webwidget = nullptr;
-    void (QComboBox::*ptr)(int index) = &QComboBox::currentIndexChanged;
-    connect(ui->comboBox,ptr,[&](int index){
-        ui->stackedWidget_2->setCurrentIndex(index);
-        if(TcpClient)
-        {
-            if(ui->comboBox->currentIndex() == 1)
-            {
-                this->TcpClient->AAA = true;
-                qDebug()<<this->TcpClient->AAA;
-            }
-            else {
-                this->TcpClient->AAA = false;
-                qDebug()<<this->TcpClient->AAA;
-            }
-        }
-        else {
-            qDebug()<<"端口没有打开";
-        }
-    });
-    connect(ui->pbn_no,&QPushButton::clicked,[&](){
-        ui->textEdit_3->clear();
-        from.clear();
-        to.clear();
-    });
-    connect(ui->pbn_small,&QPushButton::clicked,this,[=](){
-        this->showMinimized();
-    });
-    connect(ui->pbn_exit,&QPushButton::clicked,this,[=](){
-        exit(0);
-    });
+    initStyle();
+    initFunc();
 }
 
 Widget::~Widget()
@@ -100,6 +27,108 @@ Widget::~Widget()
     if(webwidget)
         delete webwidget;
     delete ui;
+}
+
+void Widget::initFunc()
+{
+    /*radio分组*/
+    Group1.addButton(ui->radioButton,1);
+    Group1.addButton(ui->radioButton_2,2);
+    Group1.addButton(ui->radioButton_5,3);
+    Group1.addButton(ui->radioButton_6,4);
+    Group1.addButton(ui->radioButton_7,5);
+    Group2.addButton(ui->radioButton_13,1);
+    Group2.addButton(ui->radioButton_14,2);
+    Group2.addButton(ui->radioButton_15,3);
+    Group2.addButton(ui->radioButton_16,4);
+    Group2.addButton(ui->radioButton_17,5);
+
+    /*外层stackedWidget管理*/
+    connect(ui->pbn_Manage,&QPushButton::clicked,[&](){
+        ui->stackedWidget->setCurrentIndex(0);
+    });
+    connect(ui->pbn_Work,&QPushButton::clicked,[&](){
+        ui->stackedWidget->setCurrentIndex(1);
+    });
+    connect(ui->pbn_Run,&QPushButton::clicked,this,&Widget::Run);
+    connect(ui->pbn_video,&QPushButton::clicked,this,&Widget::StartVideo);
+    void (QComboBox::*ptr)(int index) = &QComboBox::currentIndexChanged;
+    connect(ui->comboBox,ptr,[&](int index){
+        ui->stackedWidget_2->setCurrentIndex(index);
+        if(TcpClient)
+        {
+            if(ui->comboBox->currentIndex() == 1)
+                this->TcpClient->voiceFlag = true;
+            else
+                this->TcpClient->voiceFlag = false;
+        }
+        else {
+            ui->textEdit->append("没有连接");
+        }
+    });
+    /*内层stackedWidget管理*/
+    void (QComboBox::*ptr2)(int index) = &QComboBox::currentIndexChanged;
+    connect(ui->comboBox_Clients,ptr2,[&](int index){
+        ui->stackedWidgetK->setCurrentIndex(index);
+    });
+    connect(ui->btnMainWindow,&QPushButton::clicked,[&](){
+        ui->stackedWidgetK->setCurrentIndex(0);
+        ui->comboBox_Clients->setCurrentIndex(0);
+    });
+
+    /*other*/
+    TcpClient = nullptr;
+    webwidget = nullptr;
+    connect(ui->pbn_cut,&QPushButton::clicked,[&](){
+        if(ui->label_conditionB->text()=="在线"){
+            ui->textEdit->append("客户端1断开");
+            ui->label_conditionB->setText(QString("离线"));
+            ui->label_IPB->setText(QString(""));
+            ui->label_timeB->setText(QString(""));
+        }
+    });
+    connect(ui->pbn_cut2,&QPushButton::clicked,[&](){
+        if(ui->label_conditionB2->text()=="在线"){
+            ui->textEdit->append("客户端2断开");
+            ui->label_conditionB2->setText(QString("离线"));
+            ui->label_IPB2->setText(QString(""));
+            ui->label_timeB2->setText(QString(""));
+        }
+    });
+    connect(ui->pbn_clear,&QPushButton::clicked,[&](){
+        ui->textEdit->clear();
+    });
+    connect(ui->pbn_Save,&QPushButton::clicked,this,&Widget::Init_Message);
+    connect(ui->pbn_no,&QPushButton::clicked,[&](){
+        ui->textEdit_3->clear();
+        from.clear();
+        to.clear();
+    });
+    connect(ui->btnMenu_Min,&QPushButton::clicked,this,[=](){
+        this->showMinimized();
+    });
+    connect(ui->btnMenu_Close,&QPushButton::clicked,this,[=](){
+        exit(0);
+    });
+}
+
+void Widget::initStyle()
+{
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
+    QFile CssFile;
+    CssFile.setFileName("../Qssfile/car.qss");
+    CssFile.open(QFile::ReadOnly);
+    QTextStream filetext(&CssFile);
+    QString style = filetext.readAll();
+    this->setStyleSheet(style);
+    CssFile.close();
+    QPixmap pixmap(":/prefix1/pic/title.png");
+    ui->lab_Ico->setScaledContents(true);
+    ui->lab_Ico->setPixmap(pixmap);
+    const QIcon Min(":/prefix1/pic/small.ico");
+    const QIcon Close(":/prefix1/pic/close.ico");
+    ui->btnMenu_Min->setIcon(Min);
+    ui->btnMenu_Close->setIcon(Close);
 }
 
 void Widget::Run()
@@ -115,19 +144,16 @@ void Widget::Run()
             ui->textEdit_2->append(QString("from voice to car:")+QString(receiveMSG)+QString("            转发成功!"));
         });
         connect(this->TcpClient,&Sock::sock_disc,[&](){
-            ui->textEdit->append("客户端断开");
-            ui->label_C1Z->setText(QString("离线"));
-            ui->label_C1IP->setText(QString("IP:NULL"));
-            ui->label_C1PORT->setText(QString("端口:NULL"));
+            ui->textEdit->append("客户端1断开");
+            ui->label_conditionB->setText(QString("离线"));
+            ui->label_IPB->setText(QString(""));
+            ui->label_timeB->setText(QString(""));
 
-            ui->textEdit->append("客户端断开");
-            ui->label_C2Z->setText(QString("离线"));
-            ui->label_C2IP->setText(QString("IP:NULL"));
-            ui->label_C2PORT->setText(QString("端口:NULL"));
+            ui->textEdit->append("客户端2断开");
+            ui->label_conditionB2->setText(QString("离线"));
+            ui->label_IPB2->setText(QString(""));
+            ui->label_timeB2->setText(QString(""));
         });
-    }
-    else {
-        ui->textEdit->append(QString("端口已经打开"));
     }
 }
 
@@ -136,15 +162,15 @@ void Widget::NewConnect(QString IP,quint16 port)
     if(this->TcpClient->GetSize() == 1)
     {
         ui->textEdit->append(IP);
-        ui->label_C1Z->setText(QString("在线"));
-        ui->label_C1IP->setText(QString("IP:"+IP));
-        ui->label_C1PORT->setText(QString("端口:"+QString("%1").arg(port)));
+        ui->label_conditionB->setText(QString("在线"));
+        ui->label_IPB->setText(QString("IP:"+IP));
+        ui->label_timeB->setText(QString("端口:"+QString("%1").arg(port)));
     }
     else if(this->TcpClient->GetSize() == 2){
         ui->textEdit->append(IP);
-        ui->label_C2Z->setText(QString("在线"));
-        ui->label_C2IP->setText(QString("IP:"+IP));
-        ui->label_C2PORT->setText(QString("端口:"+QString("%1").arg(port)));
+        ui->label_conditionB2->setText(QString("在线"));
+        ui->label_IPB2->setText(QString("IP:"+IP));
+        ui->label_timeB2->setText(QString("端口:"+QString("%1").arg(port)));
     }
 }
 
@@ -202,9 +228,28 @@ void Widget::StartVideo()
     ui->stackedWidget->setCurrentIndex(2);
     if(webwidget==nullptr){
         webwidget = new WebWidget(this);
-        webwidget->webView = wkeCreateWebWindow(WKE_WINDOW_TYPE_CONTROL,(HWND)ui->widget_video->winId(),
-                                                0, 0, ui->widget_video->width(),ui->widget_video->height());
-        wkeLoadURL(webwidget->webView, "https://haokan.baidu.com/v?pd=wisenatural&vid=6013038611919188996");
+        videoDialog = new QDialog(this);
+        videoDialog->resize(1500,800);
+        webwidget->webView = wkeCreateWebWindow(WKE_WINDOW_TYPE_CONTROL,(HWND)videoDialog->winId(),
+                                                0, 0, videoDialog->width(),videoDialog->height());
+        wkeLoadURL(webwidget->webView, "http://192.168.206.83:81/stream");
         wkeShowWindow(webwidget->webView, TRUE);
+        videoDialog->show();
     }
+}
+void Widget::mousePressEvent(QMouseEvent *e)
+{
+    bPressFlag = true;
+    beginDrag = e->pos();
+    QWidget::mousePressEvent(e);
+}
+
+void Widget::mouseMoveEvent(QMouseEvent *e)
+{
+    if(bPressFlag)
+    {
+        QPoint relaPos(QCursor::pos() - beginDrag);
+        move(relaPos);
+    }
+    QWidget::mouseMoveEvent(e);
 }

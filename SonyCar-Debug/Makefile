@@ -244,6 +244,8 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/yacc.prf \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/lex.prf \
 		../SonyCar.pro \
+		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5MultimediaWidgets.prl \
+		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Multimedia.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Widgets.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Gui.prl \
 		../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Sql.prl \
@@ -432,6 +434,8 @@ Makefile: ../SonyCar.pro ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/win32
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/yacc.prf:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/mkspecs/features/lex.prf:
 ../SonyCar.pro:
+../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5MultimediaWidgets.prl:
+../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Multimedia.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Widgets.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Gui.prl:
 ../../../../Qt/Qt5.12.4/5.12.4/mingw73_64/lib/Qt5Sql.prl:

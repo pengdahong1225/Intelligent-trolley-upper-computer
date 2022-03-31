@@ -44,7 +44,7 @@ public:
         label->setAlignment(Qt::AlignCenter);
         label_title = new QLabel(login);
         label_title->setObjectName(QString::fromUtf8("label_title"));
-        label_title->setGeometry(QRect(570, 50, 191, 171));
+        label_title->setGeometry(QRect(580, 50, 191, 171));
         label_title->setFrameShape(QFrame::NoFrame);
         label_title->setAlignment(Qt::AlignCenter);
         frame = new QFrame(login);
@@ -73,10 +73,10 @@ public:
         pbn_login->setCursor(QCursor(Qt::PointingHandCursor));
         label_user = new QLabel(frame);
         label_user->setObjectName(QString::fromUtf8("label_user"));
-        label_user->setGeometry(QRect(20, 90, 51, 41));
+        label_user->setGeometry(QRect(30, 90, 41, 41));
         label_passed = new QLabel(frame);
         label_passed->setObjectName(QString::fromUtf8("label_passed"));
-        label_passed->setGeometry(QRect(20, 150, 51, 41));
+        label_passed->setGeometry(QRect(30, 150, 41, 41));
 
         retranslateUi(login);
 

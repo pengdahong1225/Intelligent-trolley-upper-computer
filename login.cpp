@@ -21,7 +21,7 @@ login::login(QWidget *parent) :
     QPixmap pixmap1(":/prefix1/pic/5.png");
     ui->label->setScaledContents(true);
     ui->label->setPixmap(pixmap1);
-    QPixmap pixmap2(":/prefix1/pic/6.png");
+    QPixmap pixmap2(":/prefix1/pic/arm.png");
     ui->label_title->setScaledContents(true);
     ui->label_title->setPixmap(pixmap2);
     QPixmap pixmap3(":/prefix1/pic/3.png");

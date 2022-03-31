@@ -8,21 +8,6 @@ Sock::Sock(QObject *parent, QString _IP, quint16 _Port):QTcpServer (parent),list
         qDebug()<<"监听失败: "<<errorString();
         close();
     }
-    timer = new QTimer(this);
-    connect(timer,&QTimer::timeout,[this](){
-        if(this->send_WakeHand(*SockArray[0]) == false)
-        {
-            for(auto& s : SockArray){
-                s->close();
-            }
-            SockArray.clear();
-            if(CON_FLAG == true)
-            {
-                emit sock_disc();
-            }
-            CON_FLAG = false;
-        }
-    });
 }
 
 Sock::~Sock()
@@ -50,7 +35,7 @@ void Sock::incomingConnection(qintptr handle)
     CON_FLAG = true;
     c = nullptr;
     if(SockArray.size() == 1){
-        timer->start(1000);
+        connect(SockArray[0],SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(MSGError(QAbstractSocket::SocketError)));
     }
 }
 
@@ -65,7 +50,7 @@ void Sock::sendMessage()
 void Sock::receiveMessage()
 {
     JsonInit();
-    if(this->AAA)
+    if(this->voiceFlag)
     {
         if(SockArray[1]->bytesAvailable()>0)
         {
@@ -82,6 +67,23 @@ void Sock::receiveMessage()
         }
     }
     SockArray[1]->readAll();
+}
+
+void Sock::MSGError(QAbstractSocket::SocketError)
+{
+    int error = SockArray[0]->error();
+    if(error==QAbstractSocket::RemoteHostClosedError)//客户端断开
+    {
+        for(auto& s : SockArray){       //小车一旦断开，清空所有连接
+            s->close();
+        }
+        SockArray.clear();
+        if(CON_FLAG == true)
+        {
+            emit sock_disc();
+        }
+        CON_FLAG = false;
+    }
 }
 
 void Sock::JsonInit()
