@@ -1,0 +1,35 @@
+QPalette{background:#F0F0F0;}
+QWidget#webwidget{
+    border:1px solid #C0DCF2;
+    border-radius:5px;
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #DEF0FE,stop:1 #C0DEF6);
+}
+QWidget#webview{
+    background-color: rgb(191, 251, 223);
+}
+.QPushButton{
+    font: 20pt;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-style:none;
+    border:1px solid #C0DCF2;
+    color:#386487;
+    padding:5px;
+    min-height:20px;
+    border-radius:5px;
+    /*渐变*/
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #DEF0FE,stop:1 #C0DEF6);
+}
+    
+.QPushButton:hover{
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #F2F9FF,stop:1 #DAEFFF);
+}
+    
+.QPushButton:pressed{
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #DEF0FE,stop:1 #C0DEF6);
+}
+QTextEdit{
+    color:#386487;
+    border-radius:10px;
+    font: 15pt;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

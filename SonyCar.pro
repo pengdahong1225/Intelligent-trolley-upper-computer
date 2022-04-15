@@ -40,8 +40,7 @@ HEADERS += \
         login.h \
         sock.h \
         webwidget.h \
-        widget.h \
-        wke.h
+        widget.h
 
 FORMS += \
         login.ui \

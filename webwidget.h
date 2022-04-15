@@ -2,18 +2,35 @@
 #define WEBWIDGET_H
 
 #include <QWidget>
-#include <QResizeEvent>
-#include "wke.h"
-
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QTextEdit>
+#include <QJsonObject>
+#include <QJsonDocument>
 class WebWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit WebWidget(QWidget *parent = nullptr);
     ~WebWidget();
-    wkeWebView webView;//浏览器控件对象
+
+signals:
+    void sendMsg(QByteArray& data);
+private slots:
+    void goSlot();
+    void backSlot();
+    void pickSlot();
+    void downSlot();
 private:
-    static QString file;
+    void initWidget();
+    void initStyle();
+    void initSignalSlots();
+    QByteArray jsonInit(QString& data);
+    std::vector<QPushButton*> pbn;
+    QWidget* webview;
+    QTextEdit* textedit;
+    QJsonObject message;
 };
 
 #endif // WEBWIDGET_H

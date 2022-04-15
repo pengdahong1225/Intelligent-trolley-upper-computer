@@ -47,6 +47,11 @@ void Sock::sendMessage()
     SockArray[0]->write(dataArray);
 }
 
+void Sock::sendMsgFrom_manual_mode(QByteArray &data)
+{
+    SockArray[0]->write(data);
+}
+
 void Sock::receiveMessage()
 {
     JsonInit();
@@ -74,7 +79,7 @@ void Sock::MSGError(QAbstractSocket::SocketError)
     int error = SockArray[0]->error();
     if(error==QAbstractSocket::RemoteHostClosedError)//客户端断开
     {
-        for(auto& s : SockArray){       //小车一旦断开，清空所有连接
+        for(auto& s : SockArray){                    //小车一旦断开，清空所有连接
             s->close();
         }
         SockArray.clear();
@@ -94,18 +99,5 @@ void Sock::JsonInit()
     message.insert("arm3", "200");
     message.insert("arm4", "200");
     message.insert("arm5", "200");
-
-    /*message.insert("goodsnums",int(from.size()));
-    message.insert("goodsstart",F);
-    this->TcpClient->message.insert("goodsend",S);*/
     message.insert("status", "okey");
-}
-
-bool Sock::send_WakeHand(QTcpSocket& sock)
-{
-    qint64 ret = sock.write("wake hands");
-    if(ret == -1){
-        return false;
-    }
-    return true;
 }
