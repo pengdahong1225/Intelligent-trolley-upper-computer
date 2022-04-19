@@ -16,7 +16,7 @@ class login : public QDialog
 public:
     explicit login(QWidget *parent = nullptr);
     ~login();
-public slots:
+private slots:
     void loginStart();
 signals:
     void send_success();

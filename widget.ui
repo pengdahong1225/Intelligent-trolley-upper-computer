@@ -53,7 +53,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_K1">
       <widget class="QWidget" name="widget_K1" native="true">
@@ -191,7 +191,7 @@
          </font>
         </property>
         <property name="text">
-         <string>时间:</string>
+         <string>端口:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -360,7 +360,7 @@
          </font>
         </property>
         <property name="text">
-         <string>时间:</string>
+         <string>端口:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -529,7 +529,7 @@
          </font>
         </property>
         <property name="text">
-         <string>时间:</string>
+         <string>端口:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -698,7 +698,7 @@
          </font>
         </property>
         <property name="text">
-         <string>时间:</string>
+         <string>端口:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -754,7 +754,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="text">
-       <string> 刷新</string>
+       <string>刷新</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox_Clients">
@@ -1139,7 +1139,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="readOnly">
@@ -1226,7 +1226,7 @@
     <property name="font">
      <font>
       <family>Consolas</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="frameShape">

@@ -413,9 +413,7 @@ public:
         textEdit_3 = new QTextEdit(page_3);
         textEdit_3->setObjectName(QString::fromUtf8("textEdit_3"));
         textEdit_3->setGeometry(QRect(460, 50, 371, 241));
-        QFont font5;
-        font5.setPointSize(14);
-        textEdit_3->setFont(font5);
+        textEdit_3->setFont(font);
         textEdit_3->setReadOnly(true);
         stackedWidget_2->addWidget(page_3);
         page_4 = new QWidget();
@@ -428,9 +426,9 @@ public:
         textEdit_2 = new QTextEdit(groupBox_5);
         textEdit_2->setObjectName(QString::fromUtf8("textEdit_2"));
         textEdit_2->setGeometry(QRect(20, 30, 721, 401));
-        QFont font6;
-        font6.setPointSize(15);
-        textEdit_2->setFont(font6);
+        QFont font5;
+        font5.setPointSize(15);
+        textEdit_2->setFont(font5);
         textEdit_2->setFrameShape(QFrame::NoFrame);
         textEdit_2->setReadOnly(true);
         stackedWidget_2->addWidget(page_4);
@@ -438,14 +436,14 @@ public:
         groupBox_2 = new QGroupBox(Widget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(30, 340, 181, 321));
-        QFont font7;
-        font7.setFamily(QString::fromUtf8("Consolas"));
-        groupBox_2->setFont(font7);
+        QFont font6;
+        font6.setFamily(QString::fromUtf8("Consolas"));
+        groupBox_2->setFont(font6);
         groupBox_2->setAlignment(Qt::AlignCenter);
         textEdit = new QTextEdit(groupBox_2);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
         textEdit->setGeometry(QRect(10, 30, 161, 281));
-        textEdit->setFont(font2);
+        textEdit->setFont(font4);
         textEdit->setFrameShape(QFrame::NoFrame);
         textEdit->setReadOnly(true);
         pbn_clear = new QPushButton(groupBox_2);
@@ -455,7 +453,7 @@ public:
         groupBox = new QGroupBox(Widget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(30, 70, 171, 251));
-        groupBox->setFont(font7);
+        groupBox->setFont(font6);
         groupBox->setAlignment(Qt::AlignCenter);
         pbn_Manage = new QPushButton(groupBox);
         pbn_Manage->setObjectName(QString::fromUtf8("pbn_Manage"));
@@ -499,7 +497,7 @@ public:
         sizePolicy1.setHeightForWidth(lab_Ico->sizePolicy().hasHeightForWidth());
         lab_Ico->setSizePolicy(sizePolicy1);
         lab_Ico->setMinimumSize(QSize(30, 0));
-        lab_Ico->setFont(font6);
+        lab_Ico->setFont(font5);
         lab_Ico->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(lab_Ico);
@@ -511,7 +509,9 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(lab_Title->sizePolicy().hasHeightForWidth());
         lab_Title->setSizePolicy(sizePolicy2);
-        lab_Title->setFont(font5);
+        QFont font7;
+        font7.setPointSize(14);
+        lab_Title->setFont(font7);
         lab_Title->setStyleSheet(QString::fromUtf8(""));
         lab_Title->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
@@ -558,7 +558,7 @@ public:
         retranslateUi(Widget);
 
         stackedWidget->setCurrentIndex(0);
-        stackedWidgetK->setCurrentIndex(3);
+        stackedWidgetK->setCurrentIndex(0);
         stackedWidget_2->setCurrentIndex(0);
 
 
@@ -573,30 +573,30 @@ public:
         label_IPB->setText(QString());
         label_conditionA->setText(QApplication::translate("Widget", "\347\212\266\346\200\201:", nullptr));
         label_IPA->setText(QApplication::translate("Widget", "\345\234\260\345\235\200:", nullptr));
-        label_timeA->setText(QApplication::translate("Widget", "\346\227\266\351\227\264:", nullptr));
+        label_timeA->setText(QApplication::translate("Widget", "\347\253\257\345\217\243:", nullptr));
         label_timeB->setText(QString());
         label_conditionB2->setText(QApplication::translate("Widget", "\347\246\273\347\272\277", nullptr));
         pbn_cut2->setText(QApplication::translate("Widget", "\345\210\207\346\226\255\350\277\236\346\216\245", nullptr));
         label_IPB2->setText(QString());
         label_conditionA2->setText(QApplication::translate("Widget", "\347\212\266\346\200\201:", nullptr));
         label_IPA2->setText(QApplication::translate("Widget", "\345\234\260\345\235\200:", nullptr));
-        label_timeA2->setText(QApplication::translate("Widget", "\346\227\266\351\227\264:", nullptr));
+        label_timeA2->setText(QApplication::translate("Widget", "\347\253\257\345\217\243:", nullptr));
         label_timeB2->setText(QString());
         label_conditionB3->setText(QApplication::translate("Widget", "\347\246\273\347\272\277", nullptr));
         pbn_cut3->setText(QApplication::translate("Widget", "\345\210\207\346\226\255\350\277\236\346\216\245", nullptr));
         label_IPB3->setText(QString());
         label_conditionA3->setText(QApplication::translate("Widget", "\347\212\266\346\200\201:", nullptr));
         label_IPA3->setText(QApplication::translate("Widget", "\345\234\260\345\235\200:", nullptr));
-        label_timeA3->setText(QApplication::translate("Widget", "\346\227\266\351\227\264:", nullptr));
+        label_timeA3->setText(QApplication::translate("Widget", "\347\253\257\345\217\243:", nullptr));
         label_timeB3->setText(QString());
         label_conditionB4->setText(QApplication::translate("Widget", "\347\246\273\347\272\277", nullptr));
         pbn_cut4->setText(QApplication::translate("Widget", "\345\210\207\346\226\255\350\277\236\346\216\245", nullptr));
         label_IPB4->setText(QString());
         label_conditionA4->setText(QApplication::translate("Widget", "\347\212\266\346\200\201:", nullptr));
         label_IPA4->setText(QApplication::translate("Widget", "\345\234\260\345\235\200:", nullptr));
-        label_timeA4->setText(QApplication::translate("Widget", "\346\227\266\351\227\264:", nullptr));
+        label_timeA4->setText(QApplication::translate("Widget", "\347\253\257\345\217\243:", nullptr));
         label_timeB4->setText(QString());
-        btnMainWindow->setText(QApplication::translate("Widget", " \345\210\267\346\226\260", nullptr));
+        btnMainWindow->setText(QApplication::translate("Widget", "\345\210\267\346\226\260", nullptr));
         comboBox_Clients->setItemText(0, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2571", nullptr));
         comboBox_Clients->setItemText(1, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2572", nullptr));
         comboBox_Clients->setItemText(2, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2573", nullptr));

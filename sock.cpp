@@ -52,6 +52,19 @@ void Sock::sendMsgFrom_manual_mode(QByteArray &data)
     SockArray[0]->write(data);
 }
 
+void Sock::cutDic()
+{
+    for(auto& s : SockArray){   //清空所有连接
+        s->close();
+    }
+    SockArray.clear();
+    if(CON_FLAG == true)
+    {
+        emit sock_disc();
+    }
+    CON_FLAG = false;
+}
+
 void Sock::receiveMessage()
 {
     JsonInit();
@@ -79,6 +92,7 @@ void Sock::MSGError(QAbstractSocket::SocketError)
     int error = SockArray[0]->error();
     if(error==QAbstractSocket::RemoteHostClosedError)//客户端断开
     {
+        qDebug()<<"client断开";
         for(auto& s : SockArray){                    //小车一旦断开，清空所有连接
             s->close();
         }

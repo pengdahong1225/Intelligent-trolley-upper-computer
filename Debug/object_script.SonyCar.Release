@@ -1,3 +1,4 @@
+release/Video.o
 release/imysql.o
 release/login.o
 release/main.o

@@ -8,12 +8,14 @@
 #include <QTextEdit>
 #include <QJsonObject>
 #include <QJsonDocument>
+
 class WebWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit WebWidget(QWidget *parent = nullptr);
     ~WebWidget();
+
 
 signals:
     void sendMsg(QByteArray& data);
@@ -31,6 +33,7 @@ private:
     QWidget* webview;
     QTextEdit* textedit;
     QJsonObject message;
+
 };
 
 #endif // WEBWIDGET_H

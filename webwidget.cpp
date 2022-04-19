@@ -4,14 +4,17 @@
 WebWidget::WebWidget(QWidget *parent) : QWidget(parent)
 {
     this->setAttribute(Qt::WA_DeleteOnClose,true);
-    this->setWindowFlag(Qt::Window);//QWeiget不是一个窗口,是一个部件,设置成窗口属性才能show
+    this->setWindowFlag(Qt::Window);//QWeiget是一个部件,设置成窗口属性才能show
     this->resize(1300,800);
     this->setWindowTitle("manual mode");
     initWidget();
     initStyle();
     initSignalSlots();
 }
-WebWidget::~WebWidget(){}
+WebWidget::~WebWidget(){
+}
+
+
 
 void WebWidget::goSlot()
 {
@@ -23,10 +26,10 @@ void WebWidget::goSlot()
 
 void WebWidget::backSlot()
 {
-    QString data("back");
+    /*QString data("back");
     QByteArray message = jsonInit(data);
     emit sendMsg(message);
-    this->textedit->append("go back\r\nSend success\r\nstatus : okey\r\n");
+    this->textedit->append("go back\r\nSend success\r\nstatus : okey\r\n");*/
 }
 
 void WebWidget::pickSlot()
@@ -110,13 +113,17 @@ void WebWidget::initSignalSlots()
 
 QByteArray WebWidget::jsonInit(QString& data)
 {
+    QString F="",S="";
+    message.insert("goodsnums",0);
+    message.insert("goodsstart",F);
+    message.insert("goodsend",S);
     message.insert("arm0", "200");
     message.insert("arm1", "200");
     message.insert("arm2", "200");
     message.insert("arm3", "200");
     message.insert("arm4", "200");
     message.insert("arm5", "200");
-    message.insert("status", "okey");
+    message.insert("goodsstatus", "okey");
     message.insert("voicecom",data);
     QJsonDocument jsondocument;
     jsondocument.setObject(message);

@@ -5,6 +5,7 @@
 #include <QTextStream>
 #include <QDialog>
 #include <QIcon>
+#include <QProcess>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -24,6 +25,10 @@ Widget::~Widget()
     }
     if(webwidget)
         delete webwidget;
+    if(process){
+        QProcess::startDetached("taskkill /F /IM python.exe");
+        delete process;
+    }
     delete ui;
 }
 
@@ -43,6 +48,8 @@ void Widget::initWidget()
 
     TcpClient = nullptr;
     webwidget = nullptr;
+    process = nullptr;
+    ui->lab_Title->installEventFilter(this);
 }
 
 void Widget::initStyle()
@@ -99,18 +106,12 @@ void Widget::initSignalSlots()
     /*other*/
     connect(ui->pbn_cut,&QPushButton::clicked,[&](){
         if(ui->label_conditionB->text()=="在线"){
-            ui->textEdit->append("client_1断开");
-            ui->label_conditionB->setText(QString("离线"));
-            ui->label_IPB->setText(QString(""));
-            ui->label_timeB->setText(QString(""));
+            this->TcpClient->cutDic();
         }
     });
     connect(ui->pbn_cut2,&QPushButton::clicked,[&](){
         if(ui->label_conditionB2->text()=="在线"){
-            ui->textEdit->append("client_2断开");
-            ui->label_conditionB2->setText(QString("离线"));
-            ui->label_IPB2->setText(QString(""));
-            ui->label_timeB2->setText(QString(""));
+            this->TcpClient->cutDic();
         }
     });
     connect(ui->pbn_clear,&QPushButton::clicked,[&](){ui->textEdit->clear();});
@@ -124,25 +125,34 @@ void Widget::initSignalSlots()
     connect(ui->btnMenu_Close,&QPushButton::clicked,this,[=](){exit(0);});
 }
 
+void Widget::showVideo()
+{
+    if(!process)
+    {
+        process = new QProcess(this);
+        process->start("cmd",QStringList()<<"/c"<<"python D:\\Codes\\Qt\\Sony-Host-computer\\server.py");
+        process->waitForStarted();
+    }
+}
+
 void Widget::Run()
 {
     if(TcpClient == nullptr)
     {
         /*192.168.212.176 :9000*/
-        TcpClient = new Sock(this,QString("10.218.52.105"),quint16(9000));
-        ui->textEdit->append(QString("端口%1打开").arg(TcpClient->GetPort()));
+        TcpClient = new Sock(this,QString("192.168.96.176"),quint16(9000));
+        ui->textEdit->append(QString("port:%1").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);
         connect(this->TcpClient,&Sock::receiveOK,[&](QString receiveMSG){
             ui->textEdit_2->append(QString("from voice to car:")+QString(receiveMSG)+QString("   Send success\r\nstatus : okey\r\n"));
         });
         connect(this->TcpClient,&Sock::sock_disc,[&](){
-            ui->textEdit->append("client_1断开");
+            ui->textEdit->append("client断开");
             ui->label_conditionB->setText(QString("离线"));
             ui->label_IPB->setText(QString(""));
             ui->label_timeB->setText(QString(""));
 
-            ui->textEdit->append("client_2断开");
             ui->label_conditionB2->setText(QString("离线"));
             ui->label_IPB2->setText(QString(""));
             ui->label_timeB2->setText(QString(""));
@@ -151,6 +161,7 @@ void Widget::Run()
     else {
         ui->textEdit->append("no server");
     }
+    showVideo();
 }
 
 void Widget::NewConnect(QString IP,quint16 port)
@@ -160,13 +171,13 @@ void Widget::NewConnect(QString IP,quint16 port)
         ui->textEdit->append(IP);
         ui->label_conditionB->setText(QString("在线"));
         ui->label_IPB->setText(QString("IP:"+IP));
-        ui->label_timeB->setText(QString("端口:"+QString("%1").arg(port)));
+        ui->label_timeB->setText(QString(QString("%1").arg(port)));
     }
     else if(this->TcpClient->GetSize() == 2){
         ui->textEdit->append(IP);
         ui->label_conditionB2->setText(QString("在线"));
         ui->label_IPB2->setText(QString("IP:"+IP));
-        ui->label_timeB2->setText(QString("端口:"+QString("%1").arg(port)));
+        ui->label_timeB2->setText(QString(QString("%1").arg(port)));
     }
 }
 
@@ -180,7 +191,7 @@ void Widget::saveMessage()
 void Widget::InitMessage()
 {
     /*整合*/
-    QString F{},S{};
+    QString F="",S="";
     for(size_t i=0;i<from.size();i++)
     {
         F += QString("%1").arg(from[i]);
@@ -207,7 +218,7 @@ void Widget::SendMessage()
     {
         InitMessage();
         this->TcpClient->sendMessage();
-        ui->textEdit_3->append("***********Send successfully***********");
+        ui->textEdit_3->append("*******Send successfully*******");
     }
     else {
         ui->textEdit->append("No Connection");
@@ -227,6 +238,7 @@ void Widget::StartVideo()
             connect(webwidget,&WebWidget::sendMsg,this,[&](QByteArray& data){
                 this->TcpClient->sendMsgFrom_manual_mode(data);
             });
+
             webwidget->show();
         }
         else {
@@ -237,3 +249,27 @@ void Widget::StartVideo()
         ui->textEdit->append("no server");
     }
 }
+
+bool Widget::eventFilter(QObject *obj, QEvent *e)
+{
+    if(obj == ui->lab_Title)
+    {
+        if(e->type() == QEvent::MouseButtonPress)
+        {
+            bPressFlag = true;
+            beginDrag = static_cast<QMouseEvent*>(e)->pos();
+            QWidget::mousePressEvent(static_cast<QMouseEvent*>(e));
+            return true;
+        }
+        if(e->type() == QEvent::MouseMove){
+            if(bPressFlag)
+            {
+                QPoint relaPos(QCursor::pos() - beginDrag);
+                move(relaPos);
+            }
+            QWidget::mouseMoveEvent(static_cast<QMouseEvent*>(e));
+        }
+    }
+    return QWidget::eventFilter(obj,e);
+}
+

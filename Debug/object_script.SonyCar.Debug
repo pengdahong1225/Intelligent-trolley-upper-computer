@@ -1,3 +1,4 @@
+debug/Video.o
 debug/imysql.o
 debug/login.o
 debug/main.o

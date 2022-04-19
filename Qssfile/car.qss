@@ -11,6 +11,7 @@ QLabel#lab_Ico,QLabel#lab_Title{
     border-style:none;
 }
 .QPushButton{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-style:none;
     border:1px solid #C0DCF2;
     color:#386487;
@@ -54,5 +55,18 @@ QGroupBox{
     font-weight: bold;
     font-size:20px;
     font-family:"fangsong";
+}
+
+/* 常态 */
+QComboBox QAbstractItemView {
+    border-radius: 4px ;
+}
+
+/* 可编辑状态 */
+QComboBox:editable
+{
+	color:red;														/*字色*/
+    font: 20pt;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 

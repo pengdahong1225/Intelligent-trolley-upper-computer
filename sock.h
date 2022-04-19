@@ -16,6 +16,7 @@ public:
     void sendMsgFrom_manual_mode(QByteArray& data);
     std::size_t GetSize(){return this->SockArray.size();}
     quint16 GetPort(){return listen_Port;}
+    void cutDic();
 
     QJsonObject message;
     void JsonInit();

@@ -28,6 +28,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        Video.cpp \
         imysql.cpp \
         login.cpp \
         main.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
         widget.cpp
 
 HEADERS += \
+        Video.h \
         imysql.h \
         login.h \
         sock.h \

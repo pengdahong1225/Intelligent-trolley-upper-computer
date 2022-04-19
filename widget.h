@@ -5,13 +5,13 @@
 #include <QWidget>
 #include <QButtonGroup>
 #include <QJsonObject>
+#include <QProcess>
+#include <QMouseEvent>
 namespace Ui {
 class Widget;
 }
-class WebWidget;
 class Widget : public QWidget
 {
-    friend class WebWidget;
     Q_OBJECT
 public:
     explicit Widget(QWidget *parent = nullptr);
@@ -21,12 +21,17 @@ public:
     void initSignalSlots();
     void saveMessage();
     void InitMessage();
+    void showVideo();
 public slots:
     void Run();
     void NewConnect(QString,quint16);
     void SendMessage();
     void receivelogin();
     void StartVideo();
+protected:
+    bool eventFilter(QObject *obj,QEvent *e);
+    /*void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);*/
 private:
     Ui::Widget *ui;
     Sock* TcpClient;
@@ -35,5 +40,9 @@ private:
     QButtonGroup Group2;
     std::vector<int> from;
     std::vector<int> to;
+    QProcess* process;
+
+    bool bPressFlag;
+    QPoint beginDrag;
 };
 #endif // WIDGET_H
