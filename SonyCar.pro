@@ -28,25 +28,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Video.cpp \
-        imysql.cpp \
-        login.cpp \
-        main.cpp \
-        sock.cpp \
-        webwidget.cpp \
-        widget.cpp
+        source\imysql.cpp \
+        source\login.cpp \
+        source\main.cpp \
+        source\sock.cpp \
+        source\webwidget.cpp \
+        source\widget.cpp \
+        source\video.cpp
 
 HEADERS += \
-        Video.h \
-        imysql.h \
-        login.h \
-        sock.h \
-        webwidget.h \
-        widget.h
+        header\imysql.h \
+        header\login.h \
+        header\sock.h \
+        header\webwidget.h \
+        header\widget.h \
+        header\video.h
 
 FORMS += \
-        login.ui \
-        widget.ui
+        ui\login.ui \
+        ui\widget.ui
+
+# configuration of opencv
+INCLUDEPATH += D:\opencv\opencv\mingw_build\install\include
+
+LIBS += D:\opencv\opencv\mingw_build\lib\libopencv_*.a
+LIBS += -LD:\opencv\opencv\mingw_build\install\x64\mingw\bin
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,12 +1,13 @@
-debug/Video.o
 debug/imysql.o
 debug/login.o
 debug/main.o
 debug/sock.o
 debug/webwidget.o
 debug/widget.o
+debug/video.o
 debug/qrc_qrc.o
 debug/moc_login.o
 debug/moc_sock.o
 debug/moc_webwidget.o
 debug/moc_widget.o
+debug/moc_video.o

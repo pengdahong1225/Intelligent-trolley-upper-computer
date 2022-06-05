@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../webwidget.h"
+#include "../../header/webwidget.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_WebWidget_t {
-    QByteArrayData data[9];
-    char stringdata0[70];
+    QByteArrayData data[12];
+    char stringdata0[109];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,11 +39,15 @@ QT_MOC_LITERAL(4, 31, 4), // "data"
 QT_MOC_LITERAL(5, 36, 6), // "goSlot"
 QT_MOC_LITERAL(6, 43, 8), // "backSlot"
 QT_MOC_LITERAL(7, 52, 8), // "pickSlot"
-QT_MOC_LITERAL(8, 61, 8) // "downSlot"
+QT_MOC_LITERAL(8, 61, 8), // "downSlot"
+QT_MOC_LITERAL(9, 70, 21), // "finishedThreadBtnSlot"
+QT_MOC_LITERAL(10, 92, 10), // "recevie_ok"
+QT_MOC_LITERAL(11, 103, 5) // "image"
 
     },
     "WebWidget\0sendMsg\0\0QByteArray&\0data\0"
-    "goSlot\0backSlot\0pickSlot\0downSlot"
+    "goSlot\0backSlot\0pickSlot\0downSlot\0"
+    "finishedThreadBtnSlot\0recevie_ok\0image"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +57,7 @@ static const uint qt_meta_data_WebWidget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,13 +65,15 @@ static const uint qt_meta_data_WebWidget[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   42,    2, 0x08 /* Private */,
-       6,    0,   43,    2, 0x08 /* Private */,
-       7,    0,   44,    2, 0x08 /* Private */,
-       8,    0,   45,    2, 0x08 /* Private */,
+       5,    0,   52,    2, 0x08 /* Private */,
+       6,    0,   53,    2, 0x08 /* Private */,
+       7,    0,   54,    2, 0x08 /* Private */,
+       8,    0,   55,    2, 0x08 /* Private */,
+       9,    0,   56,    2, 0x08 /* Private */,
+      10,    1,   57,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -77,6 +83,8 @@ static const uint qt_meta_data_WebWidget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QImage,   11,
 
        0        // eod
 };
@@ -92,6 +100,8 @@ void WebWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->backSlot(); break;
         case 3: _t->pickSlot(); break;
         case 4: _t->downSlot(); break;
+        case 5: _t->finishedThreadBtnSlot(); break;
+        case 6: _t->recevie_ok((*reinterpret_cast< QImage(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -135,13 +145,13 @@ int WebWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

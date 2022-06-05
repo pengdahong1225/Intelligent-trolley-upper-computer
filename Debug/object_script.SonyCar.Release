@@ -1,12 +1,13 @@
-release/Video.o
 release/imysql.o
 release/login.o
 release/main.o
 release/sock.o
 release/webwidget.o
 release/widget.o
+release/video.o
 release/qrc_qrc.o
 release/moc_login.o
 release/moc_sock.o
 release/moc_webwidget.o
 release/moc_widget.o
+release/moc_video.o
