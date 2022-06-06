@@ -5,7 +5,7 @@ QWidget#webwidget{
     background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #DEF0FE,stop:1 #C0DEF6);
 }
 QLabel#imageview{
-    background-color: rgb(191, 251, 223);
+    background-color: rgb(255, 255, 255);
 }
 .QPushButton{
     font: 20pt;

@@ -93,14 +93,14 @@ void WebWidget::initWidget()
     hlayout->addLayout(vlayout);
 
     setLayout(hlayout);
-    /*if(movie == nullptr)
+    if(movie == nullptr)
     {
         movie = new QMovie("../pic/img_loading.gif",QByteArray(),this);
         imageview->setMovie(movie);
         movie->resized(QSize(50,50));
         imageview->setAlignment(Qt::AlignCenter);//居中显示
         movie->start();
-    }*/
+    }
 }
 
 void WebWidget::initStyle()
@@ -141,11 +141,11 @@ void WebWidget::finishedThreadBtnSlot()
 
 void WebWidget::recevie_ok(QImage image)
 {
-    /*if(++count == 1)
+    if(++count == 1)
     {
         movie->stop();
         imageview->clear();
-    }*/
+    }
     imageview->setScaledContents(true);
     if(!image.isNull())
     {

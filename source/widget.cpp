@@ -126,7 +126,7 @@ void Widget::Run()
     if(TcpClient == nullptr)
     {
         /*192.168.96.176 :9000*/
-        TcpClient = new Sock(this,QString("10.218.31.224"),quint16(9000));
+        TcpClient = new Sock(this,QString("192.168.43.52"),quint16(9000));
         ui->textEdit->append(QString("port:%1").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);

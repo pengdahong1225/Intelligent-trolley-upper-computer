@@ -8,7 +8,7 @@ video::video(QObject *parent) : QThread(parent)
 {
     udpsocket = new QUdpSocket(this);
     //保存自己的地址和端口
-    udpsocket->bind(QHostAddress("10.218.31.224"),8888);
+    udpsocket->bind(QHostAddress("192.168.43.52"),8888);
     connect(udpsocket,&QUdpSocket::readyRead,this,&video::processPendingDatagram);
     isOpen = true;
 }
