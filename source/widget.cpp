@@ -15,6 +15,7 @@ Widget::Widget(QWidget *parent) :
     initWidget();
     initStyle();
     initSignalSlots();
+    //StartVideo();
 }
 
 Widget::~Widget(){}
@@ -41,7 +42,7 @@ void Widget::initStyle()
 {
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
     QFile CssFile;
-    CssFile.setFileName("../Qssfile/car.qss");
+    CssFile.setFileName("../../Qssfile/car.qss");
     CssFile.open(QFile::ReadOnly);
     QTextStream filetext(&CssFile);
     QString style = filetext.readAll();
@@ -115,6 +116,7 @@ void Widget::initSignalSlots()
         if(webwidget != nullptr)
         {
             delete webwidget;
+            webwidget = nullptr;
         }
         delete ui;
         exit(0);//exit函数不调用析构
@@ -125,8 +127,7 @@ void Widget::Run()
 {
     if(TcpClient == nullptr)
     {
-        /*192.168.96.176 :9000*/
-        TcpClient = new Sock(this,QString("192.168.43.52"),quint16(9000));
+        TcpClient = new Sock(this,QString("192.168.61.176"),quint16(9000));
         ui->textEdit->append(QString("port:%1").arg(TcpClient->GetPort()));
         connect(this->TcpClient,&Sock::NewConnect,this,&Widget::NewConnect);
         connect(ui->pbn_Send,&QPushButton::clicked,this,&Widget::SendMessage);
@@ -143,6 +144,18 @@ void Widget::Run()
             ui->label_IPB2->setText(QString(""));
             ui->label_timeB2->setText(QString(""));
         });
+        /* 为了同时启动视频和客户端 */
+        /*if(webwidget == nullptr)
+        {
+            webwidget = new WebWidget(this);
+            connect(webwidget,&WebWidget::sendMsg,this,[&](QByteArray& data){
+                this->TcpClient->sendMsgFrom_manual_mode(data);
+            });
+            connect(webwidget,&WebWidget::closeWebwidget,this,[&](){
+                delete webwidget;
+                webwidget = nullptr;
+            });
+        }*/
     }
     else {
         ui->textEdit->append("no server");
@@ -217,13 +230,17 @@ void Widget::receivelogin()
 
 void Widget::StartVideo()
 {
+    /* 为了同时启动视频和客户端,直接在打开端口的时候初始化视频线程，视频按钮的时候直接显示 */
     if(TcpClient){
         if(this->TcpClient->GetSize() > 0){
             webwidget = new WebWidget(this);
             connect(webwidget,&WebWidget::sendMsg,this,[&](QByteArray& data){
                 this->TcpClient->sendMsgFrom_manual_mode(data);
             });
-
+            connect(webwidget,&WebWidget::closeWebwidget,this,[&](){
+                delete webwidget;
+                webwidget = nullptr;
+            });
             webwidget->show();
         }
         else {
@@ -233,4 +250,19 @@ void Widget::StartVideo()
     else {
         ui->textEdit->append("no server");
     }
+
+    /*if(webwidget == nullptr)
+    {
+        webwidget = new WebWidget(this);
+        connect(webwidget,&WebWidget::sendMsg,this,[&](QByteArray& data){
+            this->TcpClient->sendMsgFrom_manual_mode(data);
+        });
+        connect(webwidget,&WebWidget::closeWebwidget,this,[&](){
+            delete webwidget;
+            webwidget = nullptr;
+        });
+    }
+    else {
+        webwidget->show();
+    }*/
 }

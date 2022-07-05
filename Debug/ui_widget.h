@@ -313,8 +313,6 @@ public:
         comboBox_Clients = new QComboBox(widget_2);
         comboBox_Clients->addItem(QString());
         comboBox_Clients->addItem(QString());
-        comboBox_Clients->addItem(QString());
-        comboBox_Clients->addItem(QString());
         comboBox_Clients->setObjectName(QString::fromUtf8("comboBox_Clients"));
         comboBox_Clients->setGeometry(QRect(10, 10, 771, 41));
         QFont font3;
@@ -597,10 +595,8 @@ public:
         label_timeA4->setText(QApplication::translate("Widget", "\347\253\257\345\217\243:", nullptr));
         label_timeB4->setText(QString());
         btnMainWindow->setText(QApplication::translate("Widget", "\345\210\267\346\226\260", nullptr));
-        comboBox_Clients->setItemText(0, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2571", nullptr));
-        comboBox_Clients->setItemText(1, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2572", nullptr));
-        comboBox_Clients->setItemText(2, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2573", nullptr));
-        comboBox_Clients->setItemText(3, QApplication::translate("Widget", "\345\256\242\346\210\267\347\253\2574", nullptr));
+        comboBox_Clients->setItemText(0, QApplication::translate("Widget", "\345\260\217\350\275\246", nullptr));
+        comboBox_Clients->setItemText(1, QApplication::translate("Widget", "\350\257\255\351\237\263", nullptr));
 
         comboBox->setItemText(0, QApplication::translate("Widget", "1", nullptr));
         comboBox->setItemText(1, QApplication::translate("Widget", "\350\257\255\351\237\263", nullptr));

@@ -5,6 +5,7 @@ int WebWidget::count=0;
 WebWidget::WebWidget(QWidget *parent) : QWidget(parent)
 {
     this->setWindowFlag(Qt::Window);//QWeiget是一个部件,设置成窗口属性才能show
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->resize(1300,800);
     this->setWindowTitle("manual mode");
     videoObj = nullptr;
@@ -95,7 +96,7 @@ void WebWidget::initWidget()
     setLayout(hlayout);
     if(movie == nullptr)
     {
-        movie = new QMovie("../pic/img_loading.gif",QByteArray(),this);
+        movie = new QMovie("../../pic/img_loading.gif",QByteArray(),this);
         imageview->setMovie(movie);
         movie->resized(QSize(50,50));
         imageview->setAlignment(Qt::AlignCenter);//居中显示
@@ -106,7 +107,7 @@ void WebWidget::initWidget()
 void WebWidget::initStyle()
 {
     QFile CssFile;
-    CssFile.setFileName("../Qssfile/webview.qss");
+    CssFile.setFileName("../../Qssfile/webview.qss");
     CssFile.open(QFile::ReadOnly);
     QTextStream filetext(&CssFile);       //转流
     QString style = filetext.readAll();
@@ -155,26 +156,18 @@ void WebWidget::recevie_ok(QImage image)
 
 void WebWidget::closeEvent(QCloseEvent *event)
 {
-    int result = QMessageBox::information(this,tr("提示"),tr("是否关闭界面!"),tr("是"), tr("否"),0,1);
-    if(result == 0)
+    /* 安全退出线程 */
+    if(videoObj!=nullptr)
     {
-        /* 安全退出线程 */
-        if(videoObj!=nullptr)
-        {
-            videoObj->close();
-            videoObj->deleteLater();
-            videoObj->wait();
-            delete videoObj;
-            videoObj = nullptr;
-        }
-        /* 关闭窗口 */
-        this->close();
+        videoObj->close();
+        videoObj->deleteLater();
+        videoObj->wait();
+        delete videoObj;
+        videoObj = nullptr;
     }
-    else
-    {
-        event->ignore();
-        movie->stop();
-    }
+    emit closeWebwidget();
+    /* 关闭窗口 */
+    this->close();
 }
 
 QByteArray WebWidget::jsonInit(QString& data)

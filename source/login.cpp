@@ -11,7 +11,7 @@ login::login(QWidget *parent) :
     ui(new Ui::login)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Spresence Car");
+    this->setWindowTitle("Intelligent Tracking Car Base On Spresense");
     /*初始化*/
     this->setAttribute(Qt::WA_DeleteOnClose,true);   //关闭窗口后自动关闭本对象，析构
     setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);
@@ -34,7 +34,7 @@ login::login(QWidget *parent) :
     ui->lineEdit_passwd->setClearButtonEnabled(true);
     ui->lineEdit_user->setPlaceholderText("账号/用户名");
     ui->lineEdit_passwd->setPlaceholderText("密码");
-    QFile qssFile("../Qssfile/login.qss");
+    QFile qssFile("../../Qssfile/login.qss");
     qssFile.open(QFile::ReadOnly);
     QTextStream filetext(&qssFile);
     QString stylesheet = filetext.readAll();

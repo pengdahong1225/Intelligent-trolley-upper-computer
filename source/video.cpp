@@ -8,9 +8,10 @@ video::video(QObject *parent) : QThread(parent)
 {
     udpsocket = new QUdpSocket(this);
     //保存自己的地址和端口
-    udpsocket->bind(QHostAddress("192.168.43.52"),8888);
+    udpsocket->bind(QHostAddress("192.168.61.176"),8888);
     connect(udpsocket,&QUdpSocket::readyRead,this,&video::processPendingDatagram);
     isOpen = true;
+    t_front = (double)cv::getTickCount();
 }
 
 video::~video()
@@ -20,7 +21,6 @@ video::~video()
 
 void video::processPendingDatagram()
 {
-    qDebug()<<"processPendingDatagram()";
     QByteArray datagram;
     int dataSize = static_cast<int>(udpsocket->pendingDatagramSize());
     datagram.resize(dataSize);
@@ -43,10 +43,6 @@ void video::processPendingDatagram()
         qDebug()<<"2";
         realData.append(datagram);
     }
-
-    /* from base64 */
-//    QImage image = base64Decode(datagram);
-//    emit recevie_success(image);
 }
 
 void video::close()
@@ -70,11 +66,24 @@ QImage video::dataDecode(std::vector<char>& data)
     cv::Mat img,realimg;
     QImage image;
     img = cv::imdecode(data,cv::IMREAD_COLOR);
+    /* 旋转 */
+    flip(img, img, -1);
+    /* 帧率 */
+    char str[20];
+    double fps;		//帧率
+    double t_now = ((double)cv::getTickCount() - t_front) / cv::getTickFrequency();	//getTickFrequency返回每秒的计时周期数
+    fps = (1.0 / t_now)*2;
+    sprintf_s(str, "%.2f", fps);
+    std::string s("FPS:");
+    s += str;
+    cv::putText(img,s,cv::Point(5,20),cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 255));
+
     if(img.channels()==3)
     {
         image = QImage(img.data,img.cols,img.rows,
                        img.step,QImage::Format_RGB888);
     }
+    t_front = (double)cv::getTickCount();
     return image.rgbSwapped();
 }
 

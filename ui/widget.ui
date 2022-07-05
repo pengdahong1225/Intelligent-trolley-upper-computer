@@ -773,22 +773,12 @@
       </property>
       <item>
        <property name="text">
-        <string>客户端1</string>
+        <string>小车</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>客户端2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>客户端3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>客户端4</string>
+        <string>语音</string>
        </property>
       </item>
      </widget>
@@ -1446,7 +1436,7 @@
        <string notr="true"/>
       </property>
       <property name="text">
-       <string> Spresence Car</string>
+       <string>Intelligent Tracking Car Base On Spresense</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

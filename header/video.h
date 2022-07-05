@@ -26,6 +26,8 @@ private:
     QUdpSocket* udpsocket;
     QByteArray realData;
     bool isOpen;
+
+    double t_front;
 };
 
 #endif // VIDEO_H

@@ -23,6 +23,7 @@ public:
 
 signals:
     void sendMsg(QByteArray& data);
+    void closeWebwidget();
 private slots:
     void goSlot();
     void backSlot();
